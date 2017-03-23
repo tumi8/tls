@@ -78,7 +78,14 @@ func (c *Conn) clientHandshake() error {
 
 NextCipherSuite:
 	for _, suiteId := range possibleCipherSuites {
+
+		if suiteId == TLS_FALLBACK_SCSV {
+			hello.cipherSuites = append(hello.cipherSuites, suiteId)
+		}
+		continue
+
 		for _, suite := range cipherSuites {
+
 			if suite.id != suiteId {
 				continue
 			}
