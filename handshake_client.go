@@ -81,8 +81,8 @@ NextCipherSuite:
 
 		if suiteId == TLS_FALLBACK_SCSV {
 			hello.cipherSuites = append(hello.cipherSuites, suiteId)
+			continue
 		}
-		continue
 
 		for _, suite := range cipherSuites {
 
