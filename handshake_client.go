@@ -87,7 +87,14 @@ func (c *Conn) makeClientHello() (*clientHelloMsg, ecdheParameters, error) {
 	hello.cipherSuites = make([]uint16, 0, len(possibleCipherSuites))
 
 	for _, suiteId := range possibleCipherSuites {
+
+		if suiteId == TLS_FALLBACK_SCSV {
+			hello.cipherSuites = append(hello.cipherSuites, suiteId)
+			continue
+		}
+
 		for _, suite := range cipherSuites {
+
 			if suite.id != suiteId {
 				continue
 			}
